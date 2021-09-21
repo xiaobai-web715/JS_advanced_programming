@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        <input/>
+    </form>
+    <script>
+        let target = document.forms[0].elements[0];
+        target.addEventListener('keypress' , e => {
+            // String.fromCharCode()方法可以将响应的unicode编码转换成对应的数字、字母、符号。
+            console.log(e);
+            //接下来再用正则进行匹配，只要表示数字的事件都给它禁掉
+            // if(!/\d/.test(String.fromCharCode(e.charCode))){
+            //     e.preventDefault();
+            // }
+            //优化版 =>不屏蔽掉一些基础键位(只要转化过来不是数字字符且charCode大于9就会被屏蔽掉)
+            if(!/\d/.test(String.fromCharCode(e.charCode)) && e.charCode > 9){
+                e.preventDefault();
+            }
+            //优化版 =>除了不屏蔽掉一些基础键位之外，还要使得Ctrl键不会被屏蔽掉
+            if(!/\d/.test(String.fromCharCode(e.charCode)) && e.charCode > 9 && !e.ctrlKey){
+                e.preventDefault();
+            }
+        } , false)
+    </script>
+</body>
+</html>

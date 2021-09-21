@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        <input type='text' maxlength = '3'/>
+        <input type='text' maxlength = '3'/>
+        <input type='text' maxlength = '4'/>
+    </form>
+    <script>
+        //可以结合之前学的只让它能够实现输入数字。
+        // 要实现的需求是,当我的输入达到最大允许字符的时候,聚焦的DOM元素自动切换到下一个输入框。
+        let elementsInput = document.forms[0].elements;
+        //这里获得的其实是一个类数组
+        const tabForward = (e , index) => {
+            if(e.target.value.length == e.target.maxLength && index < 2){
+                elementsInput[index + 1].focus();
+                return;
+            }
+        }
+        const choose = (e , index) => {
+            if(!/\d/.test(String.fromCharCode(e.charCode)) && e.charCode > 9 && !e.ctrlKey){
+                //满足输入的unicode编码转译过来的字符不是数字，保留了没超过9的非数字键位(也就是把左右移动键位、删除键位、退格键位没有去掉),也保留了ctrl有关的功能
+                e.preventDefault();
+            }
+        }
+        for(let i = 0 ; i < elementsInput.length ; i++){
+            let target = elementsInput[i];
+            target.addEventListener('keyup' , (e) => {
+                tabForward(e , i)
+            } , false);
+            //这里需要注意,keypress事件响应才会返回对应键位的unicode编码
+            target.addEventListener('keypress' , (e) => {
+                choose(e , i);
+            } , false)
+        }
+    </script>
+</body>
+</html>

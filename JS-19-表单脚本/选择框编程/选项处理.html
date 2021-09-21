@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        <select>
+            <option value='前端'>你好啊</option>
+            <option value='前端'>你好难啊</option>
+        </select>
+    </form>
+    <script>
+        const select = document.forms[0].elements[0]
+        select.addEventListener('change' , (e) => {
+            //这里就拿到了你所算的那个option在options中的索引位
+            let index = e.target.selectedIndex;
+            console.log(`Selected index : ${index}\nSelected text : ${e.target.options[index].text}\nSelected value : ${e.target.options[index].value}\n`)
+        } , false)
+    </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 我们想获得第一个表单 -->
+    <form id='form1' name='form2'>
+        <input type='submit'/>
+        <!-- autofocus , HTML5新特性，当进入页面后，里面聚焦在上面 -->
+        <input name='eee'/>
+        <input type='reset' />
+    </form>
+    <script>
+        // let dom1 = document.getElementById('form1');
+        // dom1.addEventListener('submit' , e => {
+        //     //这个e.target是整个form表单
+        //     // console.log(e.target)
+        //     let target = e.target;
+        //     let sub = target.elements[0];
+        //     sub.disabled = true;
+        //     //这里加这一行是去掉默认事件(让它不刷新页面,要不你看不出来被禁用的情况下)
+        //     e.preventDefault()
+        // } , false)
+
+        //当14行的表单控件聚焦时改变form
+        let dom2 = document.forms[0].elements[1];
+        dom2.addEventListener('focus' , (e) => {
+            let target = e.target;
+            if(target.style.backgroundColor != 'red'){
+                target.style.backgroundColor = 'yellow';
+            }
+        } , false)
+    </script>
+</body>
+</html>

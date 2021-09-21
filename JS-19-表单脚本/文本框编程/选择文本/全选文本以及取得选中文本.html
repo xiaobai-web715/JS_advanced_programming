@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 创建一个一次性可以显示5个字符，最多允许显示10个字符，初始值是0的一个文本框 -->
+    <!-- <input text='type' size='5' maxlength="10" value='0'/> -->
+    <!-- 创建一个高2个字符、宽4个字符，初始值是你好的一个多行文本框 -->
+    <!-- <textarea rows='2' cols='4'>你好</textarea> -->
+
+    <form id='form1' name='form2'>
+        <input type='submit'/>
+        <!-- autofocus , HTML5新特性，当进入页面后，里面聚焦在上面 -->
+        <input name='eee'/>
+        <input type='reset' />
+    </form>
+    <script>
+        const dom1 = document.forms[0].elements[1];
+        dom1.addEventListener('focus' , (e) => {
+            // 用select()方法实现聚焦时全选文本框中的内容,方便删除
+            e.target.select()
+        } , false)
+        dom1.addEventListener('select' , (e) => {
+            console.log('e.target.selectionStart' , e.target.selectionStart)
+            console.log('e.target.selectionEnd' , e.target.selectionEnd)
+            // substring()方法接收两个参数,第一个参数是截取开始的位置，第二个参数是截取到该索引位之前的一位
+            console.log(e.target.value.substring(e.target.selectionStart , e.target.selectionEnd))
+        } , false)
+    </script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        <input value="123456"/>
+    </form>
+    <script>
+        let dom = document.forms[0].elements[0];
+        dom.addEventListener('focus' , e => {
+            //Firefox最早实现的setSelectionRange()方法，传入两个参数，第一个参数是起点，第二个参数表示选择到该索引位之前
+            e.target.setSelectionRange(1 , 3);
+        } , false)
+    </script>
+</body>
+</html>

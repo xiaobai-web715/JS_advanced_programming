@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        <select>
+            <option value='前端'>你好啊</option>
+            <option value='前端'>你好难啊</option>
+        </select>
+    </form>
+    <script>
+        const select = document.forms[0].elements[0];
+        //创建一个<option></option>
+        const option = document.createElement('option');
+        //给<option></option>添加一个子元素是text类型,值是Option text
+        option.appendChild(document.createTextNode('Option text'))
+        //setAttribute方法，为DOM元素添加属性名和对应的属性值
+        option.setAttribute('value' , 'Option value')
+        //将床架的<option>添加到<select>中
+        select.appendChild(option)
+    </script>
+</body>
+</html>
