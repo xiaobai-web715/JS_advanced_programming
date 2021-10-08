@@ -14,15 +14,24 @@
         </select>
     </form>
     <script>
+        //1.document.createElement的方式创建一个新选项,通过appendChild()方法添加
         const select = document.forms[0].elements[0];
         //创建一个<option></option>
         const option = document.createElement('option');
         //给<option></option>添加一个子元素是text类型,值是Option text
-        option.appendChild(document.createTextNode('Option text'))
+        option.appendChild(document.createTextNode('吾从未失其本心'))
         //setAttribute方法，为DOM元素添加属性名和对应的属性值
-        option.setAttribute('value' , 'Option value')
-        //将床架的<option>添加到<select>中
+        option.setAttribute('value' , '网易')
+        //将创建的<option>添加到<select>中
         select.appendChild(option)
+        //2.Option构造函数创建新选项 => 接收两个参数(text、value->可选),通过appendChild()方法添加
+        let option_2 = new Option('前路漫漫' , '美团')
+        select.appendChild(option_2)
+        //3.选择框的add()方法=>DOM规定这个方法接收两个参数(要添加的新选项、要添加到其前面的参考选项)添加
+        let option_3 = new Option('命数如织,当为磐石' , '字节')
+        let option_4 = new Option('断剑重铸之日,骑士归来之时' , '阿里')
+        select.add(option_3 , null) //第二个参数写null，可以确保兼容所有的浏览器将新的选项添加到最后面
+        select.add(option_4 , 1) //第二个参数有值的话，就会把新选项添加到这个第二个参数之前
     </script>
 </body>
 </html>

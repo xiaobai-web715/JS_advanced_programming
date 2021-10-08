@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        <select>
+            <option value='前端'>你好啊</option>
+            <option value='前端'>你好难啊</option>
+        </select>
+    </form>
+    <script>
+        let select = document.forms[0].elements[0];
+        let option_2 = new Option('前路漫漫' , '美团')
+        select.appendChild(option_2)
+        let option_3 = new Option('命数如织,当为磐石' , '字节')
+        let option_4 = new Option('断剑重铸之日,骑士归来之时' , '阿里')
+        select.add(option_3 , null)
+        select.add(option_4 , 1)
+        select.removeChild(select.options[1])
+        //1.使用DOM的removeChildren()方法
+        select.removeChild(select.options[0])
+        //2.使用选择框的remove方法=>(移除选项的索引)
+        select.remove(0)
+        //3.将选择设置为null
+        select.options[0] = null;
+    </script>
+</body>
+</html>

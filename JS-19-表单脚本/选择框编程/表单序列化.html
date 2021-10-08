@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        <input name='名字'/><br>
+        <input type='radio' value='男' name='sex'/>男
+        <input type='radio' value='女' name='sex'/>女<br>
+        <input type='checkbox' value='高' name='element'/>高
+        <input type='checkbox' value='富' name='element'/>富
+        <input type='checkbox' value='帅' name='element'/>帅<br>
+        <select multiple name='select-mutiple'>
+            <option value='22'>22</option>
+            <option>山西省</option>
+            <option value='汉族'>汉族</option>
+        </select><br>
+        <select name='select-one'>
+            <option value='175'>175</option>
+            <option value='180'>180</option>
+            <option value='185'>185</option>
+        </select><br>
+        <input type='button' value='提交'/>
+    </form>
+    <script>
+        let form = document.forms[0],
+            btn = document.forms[0].elements[8];
+        //点击提交按钮所触发的表单序列化的过程
+        const submit = form => {
+            // console.log(form)
+            let parts = [],
+                optValue;
+            //for-of结合的形式遍历form.elements
+            for(let field of form.elements){
+                switch(field.type){
+                    case 'select-one':
+                    case 'select-multiple':
+                        //这里的if判断就是确保选择框的name必须是存在的
+                        if(field.name.length){
+                            for(let option of field.options){
+                                //option.selected属性=>布尔值,表示是否选中了当前选项
+                                if(option.selected){
+                                    //下面这个if-else应该是一个兼容性的写法
+                                    if(option.hasAttribute){
+                                        //hasAttribute('属性名') =>获得对应DOM元素的对应属性名的属性值
+                                        optValue = option.hasAttribute('value') ? option.value : option.text;
+                                    }else{
+                                        optValue = option.attribute('value').specified ? option.value : option.text;
+                                    }
+                                    // console.log(optValue , field.name)
+                                    // parts.push(`${encodeURIComponent(field.name)}=${encodeURIComponent(optValue)}`)
+                                    parts.push(`${field.name}=${optValue}`)
+                                }
+                            }
+                        }
+                        break;
+                    case undefined:
+                    case 'file':
+                    case 'submit':
+                    case 'button':
+                    case 'reset':
+                        break; //上面几个type字段不用提交
+                    case 'radio':
+                    case 'checkbox':
+                        if(!field.checked){
+                            break; //如果是单选框和多选框,没有选中的不会被提交
+                        }
+                    default:
+                        //剩下的都会提交 => 前提是必须有name字段且有值
+                        if(field.name.length){
+                            // parts.push(`${encodeURIComponent(field.name)}=${encodeURIComponent(field.value)}`)
+                            parts.push(`${field.name}=${field.value}`)
+                        }
+                }
+            }
+            console.log(parts.join('&'))
+            return parts.join('&')
+        }
+        btn.addEventListener('click' , submit.bind(null , form) , false)
+    </script>
+</body>
+</html>

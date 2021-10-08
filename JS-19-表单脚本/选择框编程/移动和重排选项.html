@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        <select>
+            <option value='前端'>断剑重铸之日</option>
+            <option value='前端'>骑士归来之时</option>
+        </select>
+        <select>
+        </select>
+    </form>
+    <script>
+        let select_1 = document.forms[0].elements[0],
+            select_2 = document.forms[0].elements[1];
+        let option_1 = new Option('艾欧尼亚昂扬不灭')
+        select_1.add(option_1 , 0)
+        //移动选项 => appendChild()
+        select_2.appendChild(select_1.options[2])
+        //重排选项 => insertBefore(要重排的选项 ，重新插入的位置之后的元素)
+        let option_2 = select_1.options[1]
+        select_1.insertBefore(option_2 , select_1.options[0])
+    </script>
+</body>
+</html>
