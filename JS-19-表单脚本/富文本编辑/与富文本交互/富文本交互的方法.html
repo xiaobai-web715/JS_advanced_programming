@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <iframe name='richedit' style='width:100%;height:100px'></iframe>
+    <div contenteditable style='width:100%;height:100px'></div>
+    <script>
+        window.addEventListener('load' , ()=>{
+            frames['richedit'].document.designMode = 'on'
+        } , false)
+        //监听聚焦事件来修改富文本区域的外观
+        frames['richedit'].addEventListener('focus' , ()=> {
+            //内嵌窗格中切换粗体文本样式
+            frames['richedit'].document.execCommand('bold' , false , null)
+            //内嵌窗格中切换斜体文本样式
+            frames['richedit'].document.execCommand("italic" , false , null)
+            //在内嵌窗口中创建指向XXX的链接
+            // frames['richedit'].document.execCommand('createlink' , false , 'https://www.baidu.com')
+        }, false)
+        //修改添加了contenteditable属性的元素
+        let div = document.getElementsByTagName('div')[0]
+        //监听点击事件来修改富文本区域的外观
+        div.addEventListener('click' , ()=>{
+            //内嵌窗格中切换粗体文本样式
+            document.execCommand('bold' , false , null)
+            //内嵌窗格中切换斜体文本样式
+            document.execCommand('italic' , false , null)
+            //为内容添加DOM标签
+            document.execCommand('formatblock' , false , '<h1>')
+        } , false)
+    </script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 富文本编辑的实现就是通过向HTML中插入iframe元素，并在文档加载完成之后，将dessigMode属性设置成on -->
+    <iframe name='richedit' style='height:100px;width:100px'></iframe>
+    <script>
+        // 监听load事件,来判断页面加载完成的时候
+        window.addEventListener('load' , ()=> {
+            frames['richedit'].document.designMode = 'on'
+        })
+    </script>
+</body>
+</html>
