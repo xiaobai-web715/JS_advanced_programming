@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <iframe  name='richedit'></iframe>
+    <div id='richedit' style='width:100px;height:100px;border:1px solid black' contenteditable></div>
+    <form>
+        <input name='comments_1'/>
+        <input name='comments_2'/>
+        <button>提交</button>
+    </form>
+    <script>
+        window.addEventListener('load' , ()=>{
+            frames['richedit'].document.designMode = 'on'
+        })
+        let form = document.forms[0]
+        // console.log(btn)
+        form.addEventListener('click' , (e) =>{
+            e.preventDefault()
+            console.log(e.target)
+            //<iframe>标签要通过frames[''].document.body.innerHTML的方式来获取
+            document.forms[0].elements['comments_1'].value = frames['richedit'].document.body.innerHTML;
+            //添加了contenteditable属性的DOM元素可以直接通过getELementById这类的直接选出来
+            document.forms[0].elements['comments_2'].value = document.getElementById('richedit').innerHTML
+        } , false)
+    </script>
+</body>
+</html>

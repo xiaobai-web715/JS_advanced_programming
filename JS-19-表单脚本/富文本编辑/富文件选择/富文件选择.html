@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <iframe name='richedit'></iframe>
+    <div style='width:100px;height:100px;border:1px solid black;' contenteditable></div>
+    <script>
+        window.addEventListener('load' , ()=>{
+            frames['richedit'].document.designMode = 'on'
+        },false)
+        frames['richedit'].addEventListener('blur' , ()=> {
+            // getSelection()方法会返回富文本区域选中部分的一个对象,这个对象里面有富文本区域的一些属性
+            let selection = frames['richedit'].getSelection()
+            console.log(selection)
+            //取得选中的文本 =>注意这里是选中的文本就是你右键选中
+            let selectText = selection.toString()
+            console.log('selectText' , selectText)
+            //取得表示选区的范围
+            let range = selection.getRangeAt(0)
+            console.log('range' , range)
+            //高亮选中文本 
+            let span = document.createElement('sapn')
+            span.style.backgroundColor = 'yellow'
+            range.surroundContents(span)
+        },false)
+        document.getElementsByTagName('div')[0].addEventListener('blur' , ()=>{
+            //添加contenteditable属性的直接通过document.getSelection()获得
+            let selection = document.getSelection()
+            console.log(selection)
+            let selectText = selection.toString()
+            console.log(selectText) 
+            let range = selection.getRangeAt(0)
+            let span = document.createElement('span');
+            span.style.backgroundColor = 'yellow'
+            range.surroundContents(span)
+        },false)
+    </script>
+</body>
+</html>
