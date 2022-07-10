@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        form{
+            position:relative;
+            overflow:hidden;
+        }
+        form input{
+            position:relative;
+            width:200px;
+            right:-100px;
+        }
+        form .go-left{
+            left:0;
+            transition: all 3s;
+        }
+    </style>
+</head>
+<body>
+    <form style='width:200px;border:1px solid black;'>
+        <input/>
+        <input/>
+        <input/>
+        <input/>
+        <input/>
+        <input/>
+        <input/>
+        <input/>
+        <input/>
+        <input/>
+        <input/>
+        <input/>
+        <input/>
+        <input/>
+        <input/>
+        <input/>
+        <input/>
+        <input/>
+        <input/>
+        <input/>
+        <input/>
+        <input/>
+        <input/>
+        <input/>
+        <input/>
+        <input/>
+        <input/>
+    </form>
+    <script>
+        // console.log(document.forms[0])
+        let input = document.forms[0].elements[0];
+        input.addEventListener('focus' , () => {
+            input.classList.add('go-left')
+        })
+        input.addEventListener('blur' , () => {
+            input.classList.remove('go-left')
+        })
+        let lastChild = document.forms[0].lastElementChild;
+        console.log(lastChild)
+        lastChild.addEventListener('focus' , () => {
+            document.forms[0].scrollIntoView({behavior : 'smooth' , block : 'start'})
+        })
+    </script>
+</body>
+</html>

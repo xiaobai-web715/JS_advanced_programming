@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        p:focus{
+            background-color:red;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Ninja Survey</h1>
+    </header>
+    <main>
+        <p tabindex="0">Instructions: Fill in ALL your information then click <b>Submit</b></p>
+        <section>
+            <form>
+                <label for="username">Username:</label>
+                <input name='username' id='username' />
+                <fieldset>
+                    <legend>What level ninja are you?</legend>
+                    <input text='radio' name="levels" value="newbie" id='newbie'/>
+                    <lable for="newbie"></lable>
+                    <input text='radio' name="levels" value="intermediate" id='intermediate'/>
+                    <lable for="intermediate"></lable>
+                </fieldset>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <!-- 这个accesskey属性有点奇葩,是通过快捷键方式进入,对于谷歌来说是alt+accesskey的值 -->
+        <a href="https:www.baidu.com" accesskey="b">这里有惊喜</a>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="tag content">
+        <span class="content"></span>
+    </div>
+    <span></span>
+    <script>
+        console.log('当前渲染页面的模式' , document.compatMode)
+        console.log('文档还没加载完成' , document.readyState)
+        let div1 = document.querySelectorAll('.tag .content')//通过写css文件的形式编写搜索目标,是从前向后的父子关系
+        let div2 = document.querySelectorAll('span')
+        let div3 = document.getElementsByClassName('tag content')//匹配的是class='tag content'的DOM元素
+        console.log('div1' , div1)
+        console.log('div2' , div2)
+        console.log('div3' , div3)
+        window.onload = () => {
+            //在页面加载完成之后执行打印,打印出来的值是complete表示文档已经加载完成了
+            console.log('文档已经加载完成' , document.readyState)
+        }
+    </script>
+</body>
+</html>

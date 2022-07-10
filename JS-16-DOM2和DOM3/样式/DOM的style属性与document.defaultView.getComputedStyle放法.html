@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .myDiv{
+            width : 100px;
+            height: 100px;
+            background-color:red;
+            border:1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <div class="myDiv" style='background-color:yellow;'></div>
+    <script>
+        let div = document.querySelector('.myDiv');
+        for(let i = 0 ; i < div.style.length ; i++){
+            let key = div.style[i]
+            let value = div.style.getPropertyValue(key);
+            console.log(`${key} : ${value}`)
+        }
+        //background-color : yellow打印出来只有这一行,也就是JS中的DOM.style指向的是行间样式
+        //下面看一下DOM2中新增加的document.defaultView.getComputedStyle()放法 =》两个参数目标元素,伪元素(如果不想查找伪元素这里可以传null)
+        let newStyle = document.defaultView.getComputedStyle(div , null)
+        console.log(newStyle.length)//327好像是把样式全部包含了
+        console.log('border:' , newStyle['border'])//border: 1px solid rgb(0, 0, 0)
+        console.log('background-color:' , newStyle['background-color'])//background-color: rgb(255, 255, 0)
+        //可见document.getDefaultView.getComputedStyle()放法获取的是最终的样式的集合
+    </script>
+</body>
+</html>

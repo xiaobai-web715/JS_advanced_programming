@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div style="height:200vh;width:100%;background-color:red;"></div>
+    <script>
+        let chooseYesApi = false
+        let chooseNoApi = false
+        // 这样子对滚动进行监听任务的话会执行成百上千次
+        // window.addEventListener('scroll' , () => {
+        //     if(!chooseNoApi){
+        //         chooseNoApi = true;
+        //         (() => {
+        //             chooseNoApi = false
+        //             console.log('无requestAnimationFrame的滚动轴进行滚动' , Date.now())
+        //         })()
+        //     }
+        // })
+        // 可以通过requestAnimationFrame进行节流(这个api也是用来解决js动画所带来的时间精度不准确的问题)
+        //requestAnimationFrame()接收一个参数,此参数是一个要在屏幕重绘前要调用的函数(这也解决了js动画何时开始的问题 => 重绘屏幕前进行调用)
+        //requestAnimationFrame接收的函数参数也可以接收一个参数(此参数表示下一次重绘的时间 => 是一个DOMHighResTimeStamp的实例)
+        //requestAnimationFrame也会返回一个id(可以通过cancelAnimationFrame取消重绘)
+        // window.addEventListener('scroll' , () => {
+        //     if(!chooseYesApi){
+        //         chooseYesApi = true
+        //         window.requestAnimationFrame(() => {
+        //             chooseYesApi = false
+        //             console.log('有requestAnimationFrame的滚动轴进行滚动' , Date.now())
+        //         })
+        //     }
+        // })
+        //上述版本只是从理论上进行节流(但是重绘是非常频繁的操作,更好的办法是用一个定时器来限制执行操作的频率)
+        //定时器决定执行的频率,requestAnimationFrame决定在哪个周期中进行执行
+        window.addEventListener('scroll' , () => {
+            if(!chooseYesApi){
+                chooseYesApi = true
+                window.requestAnimationFrame(() => {
+                    console.log('有requestAnimationFrame的滚动轴进行滚动' , Date.now())
+                    setTimeout(() => {
+                        chooseYesApi = false
+                    } , 50)
+                })
+            }
+        })
+    </script>
+</body>
+</html>

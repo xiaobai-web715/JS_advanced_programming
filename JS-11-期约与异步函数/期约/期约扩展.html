@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        button{
+            display:block;
+        }
+    </style>
+</head>
+<body>
+    <button>提交</button>
+    <button>取消</button>
+    <script>
+        let btns = document.getElementsByTagName('button')
+        //提供一个期约的实例,用来触发取消后的操作并求值取消状态
+        class CancelToken {
+            constructor(cancelFn){
+                //Promise { <pending> },这里定义的属性和方法会被new实例化出的对象所调用
+                this.promise = new Promise((resolve) => {cancelFn(() => {
+                    setTimeout(() => {console.log('等待的期约已经在new实例化的对象当中变成了落定状态')});
+                    resolve();
+                })})
+            }
+        }
+        const test = (time) => {
+            //这里设计一个函数,time毫秒之后让返回的期约状态变成成功状态。
+            setTimeout(() => {console.log('提交已被点击') , 0})
+            return new Promise(resolve => {
+                const id = setTimeout(() => {
+                    setTimeout(() => {console.log('等待期约变成成功的落定状态')} , 0);
+                    resolve();
+                } , time)
+                //借助CancelToken类的实例提前达到成功的落定状态
+                const cancelToken = new CancelToken((fn) => {btns[1].addEventListener('click' , fn)})
+                cancelToken.promise.then(() => {
+                    console.log('cancelToken.promise' , cancelToken.promise);
+                    //当实例化出来的变成了成功落定状态,就可以将上面name=id的定时器函数清除掉
+                    clearTimeout(id)
+                })
+            })
+        }
+        btns[0].addEventListener(
+            'click' , test.bind(null , 5000) //我们这里之所以用.bind这个看似没用的操作,因为我们要传入一个参数进去,如果不这样写,不用等到事件点击,函数就已经执行了;还可以用一个函数来实现() => {test(1000)}
+        )
+    </script>
+</body>
+</html>
