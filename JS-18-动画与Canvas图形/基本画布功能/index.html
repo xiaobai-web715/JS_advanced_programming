@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 创建canvas画布时至少要设置widht和height属性，告诉浏览器在多大的面积上进行作图 -->
+    <canvas width="200" height="200" id="drawing"></canvas>
+    <div style="background-color:red;height:10px;"></div>
+    <script>
+        let drawing = document.getElementById('drawing');
+        //要在画布上绘图首先要获取绘图上下文
+        if(drawing.getContext){
+            //fillStyle => 填充, strokeStyle => 描边
+            let content = drawing.getContext('2d');
+            console.log('content', content , Math.PI);
+            //绘制红色矩形
+            content.fillStyle = '#ff0000';
+            content.fillRect(10 , 10 , 50 , 50);//4个参数横坐标、纵坐标、长度、高度
+            //绘制蓝色半透明矩形
+            content.fillStyle = 'rgba(0, 0, 255, 0.5)'
+            content.fillRect(30, 30, 50, 50);
+            //绘制红色轮廓
+            content.strokeStyle = '#ff0000';
+            content.strokeRect(50, 50, 50, 50);
+            //绘制蓝色半透明轮廓
+            content.strokeStyle = 'rgba(0, 0, 255, 0.5)'
+            content.strokeRect(70, 70, 50,50);
+            //擦出画布的指定区域
+            content.clearRect(30 , 30 , 30 , 30) //同样也是4个参数横坐标、纵坐标、长度、高度
+            //要想绘制路径(必须调用beginPath方法以开始绘制新路径)
+            content.beginPath()
+            content.arc(100 , 100 , 90 , 0 , Math.PI * 2 , false)//可以用该函数绘制圆形
+            content.moveTo(186 , 100)//不绘制线条只将定位移动到改点(防止外圈换到画内圈的时候有一个移动的轨迹)
+            content.arc(100, 100 , 86 , 0 , Math.PI * 2 , false)
+            content.moveTo(100 , 100)
+            content.lineTo(100 , 30)//绘制上一点到该点的直线
+            content.moveTo(100, 100);
+            content.lineTo(50 , 120)
+            content.stroke()//将路线绘画出来
+        }
+    </script>
+</body>
+</html>
